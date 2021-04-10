@@ -1,0 +1,33 @@
+<h1>
+	<%- msg %>
+</h1>
+
+
+<div>
+	<% arr.forEach( (item,i) => { %>
+		<div>
+			<%= item %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="cursor: pointer;" onclick="remove( <%= i %> )">x</span>
+		</div>
+	<% } ) %>
+</div>
+
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+	function remove(i) {
+		$.ajax('http://localhost:3000/remove',{
+			data:{
+				id: i
+			},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			success:function(data){
+				console.log(data)
+				history.go(0)
+			},
+			error:function(xhr,type,errorThrown){
+				
+			}
+		});
+	}
+</script>
